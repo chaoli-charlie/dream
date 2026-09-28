@@ -1,0 +1,16 @@
+# python caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints
+
+# OS / editor files
+._*
+.DS_Store
+*.tmp
+
+# data, checkpoints, and training outputs
+data/
+output*/
+*.pth
+*.npz
+*.csv

@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "DREAM: Unifying Contrastive and Generative Objectives for Visual Understanding and Text-to-Image Generation"
+authors:
+  - {given-names: Chao, family-names: Li}
+  - {given-names: Tianhong, family-names: Li}
+  - {given-names: Sai Vidyaranya, family-names: Nuthalapati}
+  - {given-names: Hong-You, family-names: Chen}
+  - {given-names: Satya Narayan, family-names: Shukla}
+  - {given-names: Jianpeng, family-names: Cheng}
+  - {given-names: Yonghuan, family-names: Yang}
+  - {given-names: Jun, family-names: Xiao}
+  - {given-names: Xiangjun, family-names: Fan}
+  - {given-names: Aashu, family-names: Singh}
+  - {given-names: Dina, family-names: Katabi}
+  - {given-names: Shlok Kumar, family-names: Mishra}
+url: "https://chaoli-charlie.github.io/dream/"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Unifying Contrastive and Generative Objectives for Visual Understanding and Text-to-Image Generation"
+  authors:
+    - {given-names: Chao, family-names: Li}
+    - {given-names: Tianhong, family-names: Li}
+    - {given-names: Sai Vidyaranya, family-names: Nuthalapati}
+    - {given-names: Hong-You, family-names: Chen}
+    - {given-names: Satya Narayan, family-names: Shukla}
+    - {given-names: Jianpeng, family-names: Cheng}
+    - {given-names: Yonghuan, family-names: Yang}
+    - {given-names: Jun, family-names: Xiao}
+    - {given-names: Xiangjun, family-names: Fan}
+    - {given-names: Aashu, family-names: Singh}
+    - {given-names: Dina, family-names: Katabi}
+    - {given-names: Shlok Kumar, family-names: Mishra}
+  collection-title: "Advances in Neural Information Processing Systems (NeurIPS)"
+  year: 2026
+  url: "https://arxiv.org/abs/2603.02667"
+  identifiers:
+    - {type: other, value: "arXiv:2603.02667", description: "arXiv preprint"}

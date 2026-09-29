@@ -11,8 +11,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.2-ee4c2c.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[Chao Li](https://chaoli-charlie.github.io/)<sup>1*</sup>, [Tianhong Li](https://www.tianhongli.me/)<sup>1</sup>, Sai Vidyaranya Nuthalapati<sup>2</sup>, [Hong-You Chen](https://sites.google.com/view/hongyouc/about-me)<sup>2</sup>, [Satya Narayan Shukla](https://satyanshukla.github.io/)<sup>2</sup>, Jianpeng Cheng<sup>2</sup>,<br>
-Yonghuan Yang<sup>2</sup>, Jun Xiao<sup>2</sup>, Xiangjun Fan<sup>2</sup>, Aashu Singh<sup>2</sup>, [Dina Katabi](https://people.csail.mit.edu/dina/)<sup>1</sup>, [Shlok Kumar Mishra](https://shlokk.github.io/shlokmishra.github.io/)<sup>2</sup>
+[Chao Li](https://chaoli-charlie.github.io/)<sup>1*</sup>, [Tianhong Li](https://www.tianhongli.me/)<sup>1</sup>, Sai Vidyaranya Nuthalapati<sup>2</sup>, [Hong-You Chen](https://sites.google.com/view/hongyouc/about-me)<sup>2</sup>, [Satya Narayan Shukla](https://satyanshukla.github.io/)<sup>2</sup>, Jianpeng Cheng<sup>2</sup>, Yonghuan Yang<sup>2</sup>, Jun Xiao<sup>2</sup>, Xiangjun Fan<sup>2</sup>, Aashu Singh<sup>2</sup>, [Dina Katabi](https://people.csail.mit.edu/dina/)<sup>1</sup>, [Shlok Kumar Mishra](https://shlokk.github.io/shlokmishra.github.io/)<sup>2</sup>
 
 <sup>1</sup>MIT CSAIL &nbsp;&nbsp; <sup>2</sup>Meta AI &nbsp;&nbsp; <sup>*</sup>Work done at Meta
 

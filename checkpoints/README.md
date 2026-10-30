@@ -14,6 +14,14 @@
 | Training | 50 epochs (epochs 0–49; this is the final one), 4 GPUs x 64 images = global batch 256 |
 | Contents | EMA weights only: a single `model_ema` state dict (1.3 GB) |
 
+Download it into this folder from the [`dream-b-cc3m-v1` release](https://github.com/chaoli-charlie/dream/releases/tag/dream-b-cc3m-v1):
+
+```bash
+wget -P checkpoints https://github.com/chaoli-charlie/dream/releases/download/dream-b-cc3m-v1/checkpoint-49-ema.pth
+sha256sum checkpoints/checkpoint-49-ema.pth
+# 0106eea2ff647dfe8abb43a0145c6a850fc234c90e8bf9ff9f6783de96b5f3c4
+```
+
 The file holds only the exponential moving average of the weights (`model_ema`, rate 0.9999), which is what generation
 and linear probing use. The raw (non-EMA) weights, optimizer state, loss-scaler state, epoch counter and training
 arguments have been removed. When a checkpoint has no `model` entry, `--resume` and `main_linprobe.py --finetune` load

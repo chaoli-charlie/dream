@@ -167,7 +167,7 @@ DATA_PATH=/path/to/cc12m CACHED_PATH=/path/to/cc12m_cache bash scripts/extract_c
 The scripts contain the configurations used in the paper: 32 GPUs (4 nodes × 8) with 64 images per GPU, a global batch of 2048. The learning rate is `--blr × global batch / 256`, so it adapts if you use fewer GPUs. Extra arguments are passed through to the entry point.
 
 ```bash
-# DREAM-H on CC12M (4 nodes x 8 GPUs, 64 images per GPU); run on every node with its NODE_RANK
+# DREAM-L on CC12M (4 nodes x 8 GPUs, 64 images per GPU); run on every node with its NODE_RANK
 CC12M_PATH=/path/to/cc12m NNODES=4 NODE_RANK=0 MASTER_ADDR=<node0> bash scripts/train_dream.sh
 
 # baselines
@@ -236,7 +236,7 @@ Generated images are deleted after FID is computed unless `--keep_samples` is se
 
 ```bash
 torchrun --nproc_per_node=4 main_linprobe.py \
-  --model mar_huge_patch16 --img_size 256 --vae_embed_dim 4 --vae_stride 8 --patch_size 2 --buffer_size 64 \
+  --model mar_large_patch16 --img_size 256 --vae_embed_dim 4 --vae_stride 8 --patch_size 2 --buffer_size 64 \
   --finetune output/dream/checkpoint-last.pth --use_ema \
   --data_path /path/to/imagenet --output_dir output/linprobe
 ```

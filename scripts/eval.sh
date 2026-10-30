@@ -22,7 +22,7 @@ OUTPUT_DIR=${OUTPUT_DIR:-$(dirname "${CKPT}")/eval}
 torchrun --nproc_per_node=${NPROC_PER_NODE:-8} --nnodes=1 --node_rank=0 --master_port=${MASTER_PORT:-29518} \
   main.py \
   --img_size 256 --vae_embed_dim 4 --vae_stride 8 --patch_size 2 \
-  --model ${MODEL:-dream_huge_txt_conditional} \
+  --model ${MODEL:-dream_large_txt_conditional} \
   --diffloss_d 3 --diffloss_w 1024 \
   --vl_projection post_mlp_stablerep --ssl_mlp_dim 1024 --embed_dim 256 \
   --evaluate --resume "${CKPT}" --checkpoint "$(basename "${CKPT}" .pth)" --use_ema \

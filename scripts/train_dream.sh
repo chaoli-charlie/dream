@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# DREAM-H on CC12M: the default configuration used in the paper (4 nodes x 8 GPUs, global batch 2048).
+# DREAM-L on CC12M: the default configuration used in the paper (4 nodes x 8 GPUs, global batch 2048).
 # Run once per node, e.g.  NNODES=4 NODE_RANK=0 MASTER_ADDR=<node0> bash scripts/train_dream.sh
 set -euo pipefail
 DATASET=${DATASET:-cc12m}  # the paper trains on cc12m; set DATASET=cc3m (and CC3M_PATH) for a smaller run
@@ -11,7 +11,7 @@ torchrun --nproc_per_node=${NPROC_PER_NODE:-8} --nnodes=${NNODES:-4} --node_rank
   --master_addr=${MASTER_ADDR:-127.0.0.1} --master_port=${MASTER_PORT:-29517} \
   main.py \
   --img_size 256 --vae_embed_dim 4 --vae_stride 8 --patch_size 2 \
-  --model dream_huge_txt_conditional \
+  --model dream_large_txt_conditional \
   --diffloss_d 3 --diffloss_w 1024 --diffusion_batch_mul 4 \
   --epochs 48 --warmup_epochs 12 --batch_size 64 --blr 1.0e-4 --weight_decay 0.04 \
   --save_last_freq 6 \

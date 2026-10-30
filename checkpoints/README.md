@@ -1,6 +1,6 @@
 # Checkpoints
 
-## `checkpoint-49-weights.pth`: DREAM-B trained on CC3M
+## `checkpoint-49-ema.pth`: DREAM-B trained on CC3M
 
 > **This is not the model reported in the paper.** The paper's main results come from DREAM-L trained on **CC12M**.
 > This checkpoint is a smaller **DREAM-B** trained on **CC3M** with a global batch of 256, so the numbers in the main
@@ -12,12 +12,13 @@
 | Model | `dream_base_txt_conditional` (329.4M parameters, excluding the frozen T5 text encoder and VAE) |
 | Training data | CC3M |
 | Training | 50 epochs (epochs 0–49; this is the final one), 4 GPUs x 64 images = global batch 256 |
-| Contents | `model` and `model_ema` state dicts only (2.6 GB) |
+| Contents | EMA weights only: a single `model_ema` state dict (1.3 GB) |
 
-The file holds only the weights: the raw weights (`model`) and their exponential moving average (`model_ema`, rate
-0.9999). Optimizer state, loss-scaler state, epoch counter and training arguments have been removed. Loading it with
-`--resume` therefore restores the weights but not the optimizer; continuing training starts with a fresh optimizer and
-learning-rate schedule. The file loads with `torch.load(..., weights_only=True)`.
+The file holds only the exponential moving average of the weights (`model_ema`, rate 0.9999), which is what generation
+and linear probing use. The raw (non-EMA) weights, optimizer state, loss-scaler state, epoch counter and training
+arguments have been removed. When a checkpoint has no `model` entry, `--resume` and `main_linprobe.py --finetune` load
+the EMA weights in their place. Continuing training from it therefore starts from the EMA weights with a fresh
+optimizer and learning-rate schedule. The file loads with `torch.load(..., weights_only=True)`.
 
 ### Training configuration
 
@@ -47,11 +48,11 @@ The model arguments must match the ones above. `scripts/eval.sh` defaults to `dr
 ### Text-to-image generation and FID
 
 ```bash
-MODEL=dream_base_txt_conditional CKPT=checkpoints/checkpoint-49-weights.pth \
+MODEL=dream_base_txt_conditional CKPT=checkpoints/checkpoint-49-ema.pth \
   CAPTIONS=/path/to/captions REFERENCE=/path/to/reference CFG=7.4 bash scripts/eval.sh
 
 # with Semantically Aligned Decoding
-MODEL=dream_base_txt_conditional CKPT=checkpoints/checkpoint-49-weights.pth \
+MODEL=dream_base_txt_conditional CKPT=checkpoints/checkpoint-49-ema.pth \
   CAPTIONS=/path/to/captions REFERENCE=/path/to/reference CFG=7.4 bash scripts/eval.sh \
   --use_clip_critic_once --num_candidates 5 --clip_critic_threshold 32
 ```
@@ -64,7 +65,7 @@ MODEL=dream_base_txt_conditional CKPT=checkpoints/checkpoint-49-weights.pth \
 ```bash
 torchrun --nproc_per_node=4 main_linprobe.py \
   --model mar_base_patch16 --img_size 256 --vae_embed_dim 4 --vae_stride 8 --patch_size 2 --buffer_size 64 \
-  --finetune checkpoints/checkpoint-49-weights.pth --use_ema \
+  --finetune checkpoints/checkpoint-49-ema.pth --use_ema \
   --data_path /path/to/imagenet --output_dir output/linprobe
 ```
 
@@ -81,8 +82,8 @@ args = main.get_args_parser().parse_args([
 ])
 model = main.build_model(args, main.model_family(args.model))
 
-ckpt = torch.load("checkpoints/checkpoint-49-weights.pth", map_location="cpu", weights_only=True)
-model.load_state_dict(ckpt["model_ema"])  # or ckpt["model"] for the raw (non-EMA) weights
+ckpt = torch.load("checkpoints/checkpoint-49-ema.pth", map_location="cpu", weights_only=True)
+model.load_state_dict(ckpt["model_ema"])
 ```
 
 ## Reference numbers

@@ -195,7 +195,7 @@ def main(args):
         checkpoint = torch.load(args.finetune, map_location='cpu', weights_only=False)
 
         print("Load pre-trained checkpoint from: %s" % args.finetune)
-        if args.use_ema:
+        if args.use_ema or 'model' not in checkpoint:  # released checkpoints may hold only the EMA weights
             print("Using EMA weights for evaluation")
             checkpoint_model = checkpoint['model_ema']
         else:

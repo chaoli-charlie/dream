@@ -357,12 +357,15 @@ def load_checkpoint(args, model_without_ddp, optimizer, loss_scaler, device, str
     print("Loading checkpoint %s" % args.resume)
     checkpoint = torch.load(args.resume, map_location='cpu', weights_only=False)
 
-    msg = model_without_ddp.load_state_dict(checkpoint['model'], strict=strict)
+    # released checkpoints may hold only the EMA weights; use them for the model as well
+    if 'model' not in checkpoint:
+        print("No 'model' weights in checkpoint, loading the EMA weights into the model")
+    msg = model_without_ddp.load_state_dict(checkpoint.get('model', checkpoint['model_ema']), strict=strict)
     if not strict:
         print(f"Missing keys: {msg.missing_keys}")
         print(f"Unexpected keys: {msg.unexpected_keys}")
     model_params = list(model_without_ddp.parameters())
-    del checkpoint['model']  # free memory before building the EMA params
+    checkpoint.pop('model', None)  # free memory before building the EMA params
 
     ema_state_dict = checkpoint.pop('model_ema')
     ema_params = []
